@@ -43,7 +43,6 @@ app.get("/campgrounds", function(req, res){
 	})
 });
 
-
 app.post("/campgrounds", function(req, res){
 	var name = req.body.name;
 	var image = req.body.image;
