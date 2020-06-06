@@ -22,7 +22,7 @@ router.post("/", isLoggedIn, function(req, res){
 	};
 	var newCampground = { name: name, image: image, description: desc, author: author};
 
-	Campground.create(newCampground, function(err, newly){
+	Campground.create(newCampground, function(err, newCampground){
 		if(err){
 			console.log(err);
 		} else {
@@ -41,6 +41,27 @@ router.get("/:id", function(req, res){
 			console.log(err);
 		} else {
 			res.render("campgrounds/show", {campground: foundCampground});
+		}
+	});
+});
+
+router.get("/:id/edit", function(req, res){
+	Campground.findById(req.params.id, function(err, foundCampground){
+		if(err){
+			res.redirect("/campgrounds");
+		} else{
+			res.render("campgrounds/edit", {campground: foundCampground});
+		}
+	});
+});
+
+router.put("/:id", function(req, res){
+	Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
+		if(err){
+			console.log(err);
+		} else {
+			console.log(updatedCampground);
+			res.redirect("/campgrounds/" + req.params.id);
 		}
 	});
 });
