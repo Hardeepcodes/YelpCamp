@@ -95,4 +95,5 @@ function checkCampgroundOwnership(req, res, next){
 		res.redirect("back");
 	}
 };
+
 module.exports = router;
